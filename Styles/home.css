@@ -7,7 +7,7 @@
 #page-home{
     height: 100vh;
     background: url('../assets/home-background.svg') no-repeat;
-    background-position: 37vw bottom;
+    background-position: 36vw bottom;
 }
 
 #page-home .content{
