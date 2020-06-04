@@ -39,3 +39,47 @@ function getCities(event){
 document
     .querySelector("select[name = state]")
     .addEventListener("change", getCities)
+
+// Itens de coleta
+
+const itemsToCollect = document.querySelectorAll(".items-grid li")
+
+for(const item of itemsToCollect){
+    item.addEventListener("click", handleSelectedItem)
+}
+
+//Declara uma variável para o valor do input
+const collectedItems = document.querySelector("input[name=items]")
+
+let selectedItems = []
+
+function handleSelectedItem(event){
+    // Pega o target do evento de
+    const itemLi = event.target
+    // Adcionar ou remover uma classe com javascript
+    itemLi.classList.toggle("selected")
+    const itemId = itemLi.dataset.id
+
+    // Verificar se existe itens selecionados
+    // Se sim, pegar os selecionados
+    const alredySelected = selectedItems.findIndex(item => {
+        return item == itemId
+    })
+
+    // Se já estiver selecionado, tirar da seleção
+    // Se não estiver selecionado, adicionar a seleção
+    if(alredySelected >= 0){
+        //Remover
+        const filterItems = selectedItems.filter(item => {
+            const itemIsDifferent = item != itemId
+            return itemIsDifferent
+        })
+
+        selectedItems = filterItems
+    } else{
+        selectedItems.push(itemId)
+    }
+
+    // Atualizar o campo escondido com os itens selecionados
+    collectedItems.value = selectedItems
+}
